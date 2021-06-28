@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'menu',
     loadChildren: () => import('./paginas/menu/menu.module').then( m => m.MenuPageModule)
   },
+  {
+    path: 'password-reset',
+    loadChildren: () => import('./password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
+  },
 ];
 
 @NgModule({

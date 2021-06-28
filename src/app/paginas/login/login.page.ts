@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Curso } from 'src/app/modal/Curso';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,12 +9,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-
-  curso: Curso = {
-    email: '',
-    password: ''  
-    }
 
   constructor(
     private authService: AuthService,
@@ -26,12 +19,10 @@ export class LoginPage implements OnInit {
     ngOnInit() {
     }
 
-    async loginUser(curso:Curso): Promise<void> {
-      console.log(curso.email);
-      console.log(curso.password);
-      this.authService.loginUser(curso.email, curso.password).then(
+    async loginUser(form): Promise<void> {
+      this.authService.loginUser(form.value.email, form.value.password).then(
         () => {
-          this.router.navigateByUrl('user');
+          this.router.navigateByUrl('admin');
         },
         async error => {
           const alert = await this.alertCtrl.create({
@@ -43,6 +34,7 @@ export class LoginPage implements OnInit {
       );
     }
 
-  
-
+    goToReset(){
+      this.router.navigateByUrl('password-reset');
+    }
 }

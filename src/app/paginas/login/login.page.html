@@ -8,36 +8,26 @@
   <form #form="ngForm" (ngSubmit)="loginUser(form)">
     <ion-item lines = "full">
       <ion-label position = "floating"> Email </ion-label>
-      <ion-input name="email" type="text" placeholder="your@email.com" [(ngModel)]="curso.email"  required></ion-input>
+      <ion-input name="email" type="text" placeholder="your@email.com" ngModel required></ion-input>
     </ion-item>
 
     <ion-item lines = "full">
       <ion-label position = "floating"> Palavra Passe </ion-label>
-      <ion-input name="password" type="password" placeholder="password" [(ngModel)]="curso.password"  required></ion-input>
+      <ion-input name="password" type="password" placeholder="password" ngModel required></ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" [disabled]="form.invalid" expand="block" (click)="loginUser(curso)">Login</ion-button>
+        <ion-button type="submit" [disabled]="form.invalid" expand="block" (click)="loginUser(form)">Login</ion-button>
       </ion-col>
     </ion-row>
   </form>
 
   <div style="text-align: center; margin: auto;">
-  <h6 click="goToReset()"> Esqueceu a Palavra Passe?</h6>
+    <h6 (click)="goToReset()"> Esqueceu a Palavra Passe?</h6>
   </div>
 
 </ion-content>
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Card Title</ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content>
-    Keep close to Nature's heart... and break clear away, once in awhile,
-    and climb a mountain or spend a week in the woods. Wash your spirit clean.
-  </ion-card-content>
-</ion-card>
 
  
