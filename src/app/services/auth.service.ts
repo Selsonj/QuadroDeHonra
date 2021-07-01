@@ -13,15 +13,6 @@ export class AuthService {
   constructor() { }
 
   loginUser (email: string, password: string ): Promise<firebase.auth.UserCredential>{
-   /* if(email === 'joaoselson@gmail.com' && password === 'Quadro'){
-      this.currentUser.nome = 'Admin';
-      this.currentUser.role = 0;
-    }
-    else
-    {
-      this.currentUser.nome = 'Utilizador';
-      this.currentUser.role = 1;
-    }*/
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
@@ -41,5 +32,4 @@ export class AuthService {
   isAdmin(){
     return this.currentUser.role === 0;
   }
-
 }

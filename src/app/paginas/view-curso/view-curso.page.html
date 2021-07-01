@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>view-curso</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>{{curso.nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card color="secondary">
+  <ion-card-header>
+    <ion-card-title>{{curso.nome}}</ion-card-title>
+  </ion-card-header>
 
+  <ion-card-content>
+    <br>
+    <ion-button slot="start" color="warning" [routerLink]="'/update-curso/' + curso.id">Editar</ion-button>
+    <ion-button slot="end" color="danger" (click)="deleteCurso()">Eliminar o Curso</ion-button>
+  </ion-card-content>
+
+  </ion-card>
 </ion-content>

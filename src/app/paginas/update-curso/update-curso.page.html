@@ -1,9 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>update-curso</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Atualizar Curso</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item>
+      <ion-input placeholder="Nome do Curso" [(ngModel)]="curso.nome"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button color="primary" expand="full" (click)="updateCurso()">Atualizar Curso</ion-button>
 </ion-content>

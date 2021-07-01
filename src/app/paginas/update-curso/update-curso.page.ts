@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Curso } from 'src/app/modal/Curso';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-update-curso',
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateCursoPage implements OnInit {
 
-  constructor() { }
+  curso: Curso = {
+    nome: ''
+  };
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private fbService: FirebaseService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
+  ngAfterViewInit(): void {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if(id){
+      this.fbService.getCurso(id).subscribe(cursoData => {
+        this.curso = cursoData;
+      });
+    }
+  }
+
+  updateCurso(){
+    this.fbService.updateCurso(this.curso.id).then(() => {
+      this.router.navigateByUrl('/');
+    })
+  }
 }

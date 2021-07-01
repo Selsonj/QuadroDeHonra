@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Curso } from 'src/app/modal/Curso';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-add-curso',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddCursoPage implements OnInit {
 
-  constructor() { }
+  curso: Curso = {
+    nome: ''
+  };
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private fbService: FirebaseService,
+    private toastCtrl: ToastController,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  addCurso(){
+    this.fbService.addCurso(this.curso).then(() => {
+      this.router.navigateByUrl('/');
+    }, err => {
+
+    });
   }
 
 }

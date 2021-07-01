@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +19,35 @@ export class LoginPage implements OnInit {
     ) { }
 
     ngOnInit() {
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        
+        if(user)
+        {
+          let self = this;
+          const userEmail = user.email;
+          if(userEmail == "joaoselson@gmail.com"){
+            self.router.navigateByUrl('admin');
+          }
+          else
+          self.router.navigateByUrl('user');
+        }
+     });
     }
 
     async loginUser(form): Promise<void> {
+      
       this.authService.loginUser(form.value.email, form.value.password).then(
         () => {
-          this.router.navigateByUrl('admin');
+          let self = this;
+          firebase.auth().onAuthStateChanged(function(user) {  
+              const userEmail = user.email;
+              if(userEmail == "joaoselson@gmail.com"){
+                self.router.navigateByUrl('admin');
+              }
+              else
+               self.router.navigateByUrl('user');
+         });
         },
         async error => {
           const alert = await this.alertCtrl.create({
@@ -37,4 +62,5 @@ export class LoginPage implements OnInit {
     goToReset(){
       this.router.navigateByUrl('password-reset');
     }
+
 }

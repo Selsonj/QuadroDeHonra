@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
   },
   {
-    path: 'update-curso',
+    path: 'update-curso/:id',
     loadChildren: () => import('./paginas/update-curso/update-curso.module').then( m => m.UpdateCursoPageModule)
   },
   {
@@ -36,8 +36,12 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/add-curso/add-curso.module').then( m => m.AddCursoPageModule)
   },
   {
-    path: 'view-curso',
+    path: 'view-curso/:id',
     loadChildren: () => import('./paginas/view-curso/view-curso.module').then( m => m.ViewCursoPageModule)
+  },
+  {
+    path: 'cadastro',
+    loadChildren: () => import('./paginas/cadastro/cadastro.module').then( m => m.CadastroPageModule)
   },
 ];
 
