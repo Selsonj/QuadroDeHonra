@@ -33,8 +33,8 @@ export class UpdateCursoPage implements OnInit {
   }
 
   updateCurso(){
-    this.fbService.updateCurso(this.curso.id).then(() => {
-      this.router.navigateByUrl('/');
+    this.fbService.updateCurso(this.curso).then(() => {
+      this.router.navigateByUrl('admin');
     })
   }
 }

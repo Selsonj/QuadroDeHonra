@@ -16,6 +16,10 @@ export class AuthService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
+  cadastroUser (email: string, password: string ): Promise<firebase.auth.UserCredential>{
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  }
+
   resetPassword(email:string): Promise<void>
   {
     return firebase.auth().sendPasswordResetEmail(email);

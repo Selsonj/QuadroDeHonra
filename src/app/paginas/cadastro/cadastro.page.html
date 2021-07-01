@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cadastro</ion-title>
+    <ion-title>Cadastro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="cadastra(form)">
+    
+    <ion-item lines = "full">
+      <ion-input name="email" type="text" placeholder="oseu@email.com" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item lines = "full">
+      <ion-input name="password" type="password" placeholder="password" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-label>Curso</ion-label>
+      <ion-select interface="popover">
+        <ion-select-option *ngFor="let curso of (cursos | async)" value={{curso.nome}}>{{curso.nome}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" [disabled]="form.invalid" expand="block" (click)="cadastro(form)">Login</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <div style="text-align: center; margin: auto;">
+    <h6 (click)="goToLogin()"> Já tem conta?</h6>
+  </div>
 
 </ion-content>
+

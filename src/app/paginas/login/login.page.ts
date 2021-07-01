@@ -63,4 +63,7 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('password-reset');
     }
 
+    goToCadastro(){
+      this.router.navigateByUrl('cadastro');
+    }
 }

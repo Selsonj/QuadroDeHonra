@@ -27,7 +27,7 @@ export class AddCursoPage implements OnInit {
 
   addCurso(){
     this.fbService.addCurso(this.curso).then(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('admin');
     }, err => {
 
     });

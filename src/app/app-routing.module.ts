@@ -12,10 +12,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'user',
-    loadChildren: () => import('./paginas/user/user.module').then( m => m.UserPageModule)
-  },
-  {
     path: 'admin',
     loadChildren: () => import('./paginas/admin/admin.module').then( m => m.AdminPageModule)
   },
@@ -42,6 +38,10 @@ const routes: Routes = [
   {
     path: 'cadastro',
     loadChildren: () => import('./paginas/cadastro/cadastro.module').then( m => m.CadastroPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./paginas/user/user.module').then( m => m.UserPageModule)
   },
 ];
 

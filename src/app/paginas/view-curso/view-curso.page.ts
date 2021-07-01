@@ -35,7 +35,7 @@ export class ViewCursoPage implements OnInit {
 
   deleteCurso(){
     this.fbService.deleteCurso(this.curso.id).then(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('admin');
     })
   }
 
