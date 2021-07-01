@@ -27,6 +27,18 @@ const routes: Routes = [
     path: 'password-reset',
     loadChildren: () => import('./password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
   },
+  {
+    path: 'update-curso',
+    loadChildren: () => import('./paginas/update-curso/update-curso.module').then( m => m.UpdateCursoPageModule)
+  },
+  {
+    path: 'add-curso',
+    loadChildren: () => import('./paginas/add-curso/add-curso.module').then( m => m.AddCursoPageModule)
+  },
+  {
+    path: 'view-curso',
+    loadChildren: () => import('./paginas/view-curso/view-curso.module').then( m => m.ViewCursoPageModule)
+  },
 ];
 
 @NgModule({
