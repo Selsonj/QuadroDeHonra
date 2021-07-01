@@ -10,7 +10,7 @@ import { Cadeira } from '../modal/Cadeira';
 })
 export class FirebaseService {
 
-  //Para os cursis
+  //Para os cursos
   private cursos: Observable<Curso[]>;
   private cursoColletion: AngularFirestoreCollection<Curso>;
 
@@ -66,8 +66,10 @@ export class FirebaseService {
   }
 
   // Criar uma nova cadeira
-  addCadeira(curso: Curso): Promise<DocumentReference> {
-    return this.cursoColletion.add(curso.id);
+  addCadeira(cadeira: Cadeira, id: string): Promise<DocumentReference> {
+    // Definir a colecao
+    this.cadeiraColletion = this.afs.collection<Cadeira>('cursos/'+id+'/cadeira');
+    return this.cadeiraColletion.add(cadeira);
   }
 
 }

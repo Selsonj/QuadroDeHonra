@@ -17,8 +17,7 @@ export class AdminPage implements OnInit {
   constructor(private fbService: FirebaseService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.cursos = this.fbService.getCursos();
-    
+    this.cursos = this.fbService.getCursos();  
   }
 
   logout()

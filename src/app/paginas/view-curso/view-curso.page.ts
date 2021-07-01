@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Curso } from 'src/app/modal/Curso';
 import { Cadeira } from 'src/app/modal/Cadeira';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-curso',
@@ -21,6 +22,7 @@ export class ViewCursoPage implements OnInit {
     nome: ''
   };
 
+  private cadeiras: Observable<Cadeira[]>;
   constructor(
     private activateRoute: ActivatedRoute,
     private fbService: FirebaseService,
@@ -28,6 +30,7 @@ export class ViewCursoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cadeiras = this.fbService.getCursos();  
   }
 
   ngAfterViewInit(): void {
@@ -40,8 +43,9 @@ export class ViewCursoPage implements OnInit {
   }
 
   addCadeira(){
-    this.fbService.addCadeira(this.curso.id).then(() => {
-      this.router.navigateByUrl('view-curso');
+    const id = this.activateRoute.snapshot.paramMap.get('id');
+    this.fbService.addCadeira(this.cadeira, id).then(() => {
+      //this.router.navigateByUrl('view-curso');
     }, err => {
 
     });

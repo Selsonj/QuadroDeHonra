@@ -30,7 +30,21 @@
             <ion-input placeholder="Nome do Curso" [(ngModel)]="cadeira.nome"></ion-input>
           </ion-item>
         </ion-list>
-        <ion-button color="primary" expand="full" (click)="addCadeira()">cadei</ion-button>
+        <ion-button color="primary" expand="full" (click)="addCadeira()">Cadeira</ion-button>
+        
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              Cadeiras do Curso
+            </ion-label>
+          </ion-list-header>
+        <ion-item *ngFor="let cadeira of (cadeiras | async)">
+          <ion-label>
+            <h2>{{cadeira.nome}}</h2>
+          </ion-label>
+          <ion-button fill="outline" slot="end" [routerLink]="'/view-curso/'+curso.id">Ver</ion-button>
+        </ion-item>
+      </ion-list>
 
     </ion-slide>
     
