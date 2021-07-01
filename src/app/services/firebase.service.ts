@@ -14,7 +14,10 @@ export class FirebaseService {
 
   constructor(private afs: AngularFirestore) { 
 
+    // Definir a colecao
     this.cursoColletion = this.afs.collection<Curso>('cursos');
+    
+    // Pega os dados da colecao
     this.cursos = this.cursoColletion.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -25,4 +28,35 @@ export class FirebaseService {
       })
     );
   }
+
+  getCursos(): Observable<Curso[]>{
+    return this.cursos;
+  }
+
+  // Pegando um curso
+  getCurso(id: string): Observable<Curso> {
+    return this.cursoColletion.doc<Curso>(id).valueChanges().pipe(
+      take(1),
+      map(curso => {
+        curso.id = id;
+        return curso;
+      })
+    );
+  }
+
+  // Criar um novo curso
+  addCurso(curso: Curso): Promise<DocumentReference> {
+    return this.cursoColletion.add(curso);
+  }
+
+  // Atualizar curso
+  updateCurso(curso: Curso): Promise<void> {
+    return this.cursoColletion.doc(curso.id).update({nome: curso.nome});
+  }
+
+  // Apagar Curso
+  deleteCurso(id: string): Promise<void> {
+    return this.cursoColletion.doc(id).delete();
+  }
+
 }

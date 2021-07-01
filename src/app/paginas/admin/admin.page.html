@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>admin</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Admin</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-searchbar></ion-searchbar>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>
+        Cursos
+      </ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let curso of (cursos | async)">
+      <ion-label>
+        <h2>{{note.title}}</h2>
+      </ion-label>
+      <ion-button fill="outline" slot="end" [routerLink]="'/view-curso/'+curso.id">Ver</ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="'/add-curso'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 
 </ion-content>

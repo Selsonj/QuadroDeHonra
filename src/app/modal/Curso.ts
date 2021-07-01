@@ -1,5 +1,5 @@
 export interface Curso {
 
-    email: string;
-    password: string;
+    id: string;
+    nome: string;
 }
