@@ -8,17 +8,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-card color="secondary">
-  <ion-card-header>
-    <ion-card-title>{{curso.nome}}</ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content>
-    <br>
-    <ion-button slot="start" color="warning" [routerLink]="'/update-curso/' + curso.id">Editar</ion-button>
-    <ion-button slot="end" color="danger" (click)="deleteCurso()">Eliminar</ion-button>
-    <ion-button slot="end" color="primary" (click)="addCadeira()">Add Cadeira</ion-button>
-  </ion-card-content>
-  </ion-card>
   
+  
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide class="slide">
+      <ion-card color="secondary">
+        <ion-card-header>
+          <ion-card-title>{{curso.nome}}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <br>
+          <ion-button slot="start" color="warning" [routerLink]="'/update-curso/' + curso.id">Editar</ion-button>
+          <ion-button slot="end" color="danger" (click)="deleteCurso()">Eliminar</ion-button>
+          <ion-button slot="end" color="primary" (click)="addCadeira()">Add Cadeira</ion-button>
+        </ion-card-content>
+        </ion-card>
+
+        <ion-list>
+          <ion-item>
+            <ion-input placeholder="Nome do Curso" [(ngModel)]="cadeira.nome"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button color="primary" expand="full" (click)="addCadeira()">cadei</ion-button>
+
+    </ion-slide>
+    
+    <ion-slide class="slide">
+      
+      <h1>Welcome</h1>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem tempora, deserunt ab, aliquid.
+    </ion-slide>
+  </ion-slides>
 </ion-content>

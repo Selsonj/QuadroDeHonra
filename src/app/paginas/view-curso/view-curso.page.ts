@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Curso } from 'src/app/modal/Curso';
+import { Cadeira } from 'src/app/modal/Cadeira';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -11,6 +12,11 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class ViewCursoPage implements OnInit {
 
   curso: Curso = {
+    id: '',
+    nome: ''
+  };
+
+  cadeira: Cadeira = {
     id: '',
     nome: ''
   };
@@ -31,6 +37,14 @@ export class ViewCursoPage implements OnInit {
         this.curso = cursoData;
       });
     }
+  }
+
+  addCadeira(){
+    this.fbService.addCadeira(this.curso.id).then(() => {
+      this.router.navigateByUrl('view-curso');
+    }, err => {
+
+    });
   }
 
   deleteCurso(){

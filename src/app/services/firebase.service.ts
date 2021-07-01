@@ -3,14 +3,20 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { Observable } from 'rxjs';
 import { map, take} from 'rxjs/operators';
 import { Curso } from '../modal/Curso';
+import { Cadeira } from '../modal/Cadeira';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
+  //Para os cursis
   private cursos: Observable<Curso[]>;
   private cursoColletion: AngularFirestoreCollection<Curso>;
+
+  //Para as cadeiras
+  private curcadeiras: Observable<Cadeira[]>;
+  private cadeiraColletion: AngularFirestoreCollection<Cadeira>;
 
   constructor(private afs: AngularFirestore) { 
 
@@ -57,6 +63,11 @@ export class FirebaseService {
   // Apagar Curso
   deleteCurso(id: string): Promise<void> {
     return this.cursoColletion.doc(id).delete();
+  }
+
+  // Criar uma nova cadeira
+  addCadeira(curso: Curso): Promise<DocumentReference> {
+    return this.cursoColletion.add(curso.id);
   }
 
 }
