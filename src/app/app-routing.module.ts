@@ -42,11 +42,7 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./paginas/user/user.module').then( m => m.UserPageModule)
-  },
-  {
-    path: 'modal-cadeira',
-    loadChildren: () => import('./paginas/modal-cadeira/modal-cadeira.module').then( m => m.ModalCadeiraPageModule)
-  },
+  }
 ];
 
 @NgModule({

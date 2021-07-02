@@ -21,17 +21,9 @@
           <br>
           <ion-button slot="start" color="warning" [routerLink]="'/update-curso/' + curso.id">Editar</ion-button>
           <ion-button slot="end" color="danger" (click)="deleteCurso()">Eliminar</ion-button>
-          <ion-button slot="end" color="primary" (click)="openIonModal()">Add Cadeira</ion-button>
+          <ion-button slot="end" color="primary" (click)="_openModal()">Add Cadeira</ion-button>
         </ion-card-content>
         </ion-card>
-      <!--
-        <ion-list>
-          <ion-item>
-            <ion-input placeholder="Nome do Curso" [(ngModel)]="cadeira.nome"></ion-input>
-          </ion-item>
-        </ion-list>
-        <ion-button color="primary" expand="full" (click)="addCadeira()">Cadeira</ion-button>
-        -->
 
         <ion-list>
           <ion-list-header>

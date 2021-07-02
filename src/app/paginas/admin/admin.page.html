@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Admin</ion-title>
-      <ion-icon name="exit" padding (click) = "logout()">Sair</ion-icon>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
