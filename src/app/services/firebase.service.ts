@@ -15,7 +15,7 @@ export class FirebaseService {
   private cursoColletion: AngularFirestoreCollection<Curso>;
 
   //Para as cadeiras
-  private curcadeiras: Observable<Cadeira[]>;
+  private cadeiras: Observable<Cadeira[]>;
   private cadeiraColletion: AngularFirestoreCollection<Cadeira>;
 
   constructor(private afs: AngularFirestore) { 
@@ -33,6 +33,8 @@ export class FirebaseService {
         });
       })
     );
+
+    
   }
 
   getCursos(): Observable<Curso[]>{
@@ -67,9 +69,30 @@ export class FirebaseService {
 
   // Criar uma nova cadeira
   addCadeira(cadeira: Cadeira, id: string): Promise<DocumentReference> {
+    
     // Definir a colecao
     this.cadeiraColletion = this.afs.collection<Cadeira>('cursos/'+id+'/cadeira');
+
+   
     return this.cadeiraColletion.add(cadeira);
+  }
+
+  // Pega cadeiras
+  getCadeiras(id:string): Observable<Cadeira[]>{
+
+     // Pega os dados da colecao cadeiras
+     this.cadeiraColletion = this.afs.collection<Cadeira>('cursos/'+id+'/cadeira');
+     this.cadeiras = this.cadeiraColletion.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.cadeiras;
   }
 
 }

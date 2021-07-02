@@ -23,6 +23,7 @@ export class ViewCursoPage implements OnInit {
   };
 
   private cadeiras: Observable<Cadeira[]>;
+
   constructor(
     private activateRoute: ActivatedRoute,
     private fbService: FirebaseService,
@@ -30,7 +31,9 @@ export class ViewCursoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cadeiras = this.fbService.getCursos();  
+    const id = this.activateRoute.snapshot.paramMap.get('id');
+
+    this.cadeiras = this.fbService.getCadeiras(id);  
   }
 
   ngAfterViewInit(): void {
