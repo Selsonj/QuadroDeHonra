@@ -4,6 +4,7 @@ import { Curso } from 'src/app/modal/Curso';
 import { Cadeira } from 'src/app/modal/Cadeira';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Observable } from 'rxjs';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-curso',
@@ -27,7 +28,8 @@ export class ViewCursoPage implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private fbService: FirebaseService,
-    private router: Router
+    private router: Router,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
