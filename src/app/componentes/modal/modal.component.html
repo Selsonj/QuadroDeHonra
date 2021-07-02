@@ -1,20 +1,24 @@
 <ion-header>
-  <ion-toobar>
+  <ion-toolbar>
     <ion-title>Add Cadeira</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="_dismiss()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-  </ion-toobar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <br>
-  <ion-list>
-    <ion-item>
-      <ion-input placeholder="Nome da Cadeira" [(ngModel)]="cadeira.nome"></ion-input>
-    </ion-item>
-  </ion-list><br>
-  <ion-button color="primary" expand="block" (click)="addCadeira()">Cadeira</ion-button>
+  <form #form="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-input name="nome" placeholder="Nome da Cadeira" ngModel required></ion-input>
+      </ion-item>
+    </ion-list><br>
+    <ion-button color="primary" type="submit" [disabled]="form.invalid" expand="block" (click)="addCadeira(form)">Cadeira</ion-button>
+
+  </form>
+  
 </ion-content>

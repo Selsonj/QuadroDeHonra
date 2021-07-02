@@ -16,10 +16,6 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/admin/admin.module').then( m => m.AdminPageModule)
   },
   {
-    path: 'menu',
-    loadChildren: () => import('./paginas/menu/menu.module').then( m => m.MenuPageModule)
-  },
-  {
     path: 'password-reset',
     loadChildren: () => import('./password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
   },

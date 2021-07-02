@@ -19,11 +19,6 @@ export class ViewCursoPage implements OnInit {
     nome: ''
   };
 
-  cadeira: Cadeira = {
-    id: '',
-    nome: ''
-  };
-
   private cadeiras: Observable<Cadeira[]>;
 
   constructor(
@@ -43,8 +38,13 @@ export class ViewCursoPage implements OnInit {
 
   async _openModal()
   {
+    const ids = this.activateRoute.snapshot.paramMap.get('id');
+
     const modal = await this.modalCtrl.create({
       component: ModalComponent,
+      componentProps: {
+        "id": ids
+      },
 
       cssClass: 'my-modal-component'
     })
@@ -59,15 +59,6 @@ export class ViewCursoPage implements OnInit {
         this.curso = cursoData;
       });
     }
-  }
-
-  addCadeira(){
-    const id = this.activateRoute.snapshot.paramMap.get('id');
-    this.fbService.addCadeira(this.cadeira, id).then(() => {
-      //this.router.navigateByUrl('view-curso');
-    }, err => {
-
-    });
   }
 
   deleteCurso(){

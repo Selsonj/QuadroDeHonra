@@ -11,11 +11,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from './firebase.config';
+import { ModalComponent } from './componentes/modal/modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ModalComponent],
   entryComponents: [],
   imports: [BrowserModule,
+    FormsModule,
      IonicModule.forRoot(),
       AppRoutingModule,
       AngularFireModule.initializeApp(firebaseConfig),
