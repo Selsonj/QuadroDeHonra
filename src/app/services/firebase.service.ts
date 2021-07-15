@@ -3,7 +3,9 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { Observable } from 'rxjs';
 import { map, take} from 'rxjs/operators';
 import { Curso } from '../modal/Curso';
+import { Rank } from '../modal/Rank';
 import { Cadeira } from '../modal/Cadeira';
+import { User } from '../modal/User';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,14 @@ export class FirebaseService {
   //Para as cadeiras
   private cadeiras: Observable<Cadeira[]>;
   private cadeiraColletion: AngularFirestoreCollection<Cadeira>;
+
+  //Para os usuarios
+  private users: Observable<User[]>;
+  private userColletion: AngularFirestoreCollection<User>;
+
+  //Para o ranking
+  private ranks: Observable<Rank[]>;
+  private rankColletion: AngularFirestoreCollection<Rank>;
 
   constructor(private afs: AngularFirestore) { 
 
@@ -34,13 +44,32 @@ export class FirebaseService {
       })
     );
 
+    // Definir a colecao rank
+    this.rankColletion = this.afs.collection<Rank>('ranking');
     
+    // Pega os dados da colecao rank
+    this.ranks = this.rankColletion.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, ...data};
+        });
+      })
+    );
+
   }
 
   getCursos(): Observable<Curso[]>{
     return this.cursos;
   }
 
+  getRanks(): Observable<Rank[]>{
+    return this.ranks;
+  }
+  ///////////////////////////
+
+  
   // Pegando um curso
   getCurso(id: string): Observable<Curso> {
     return this.cursoColletion.doc<Curso>(id).valueChanges().pipe(
@@ -72,8 +101,6 @@ export class FirebaseService {
     
     // Definir a colecao
     this.cadeiraColletion = this.afs.collection<Cadeira>('cursos/'+id+'/cadeira');
-
-   
     return this.cadeiraColletion.add(cadeira);
   }
 
@@ -90,9 +117,51 @@ export class FirebaseService {
           return {id, ...data};
         });
       })
-    );
-
+    );    
     return this.cadeiras;
   }
 
+  // Pega estudantes
+  getUsers(id:string): Observable<User[]>{
+
+    // Pega os dados da colecao users
+    this.userColletion = this.afs.collection<User>('cursos/'+id+'/users');
+    this.users = this.userColletion.snapshotChanges().pipe(
+     map(actions => {
+       return actions.map(a => {
+         const data = a.payload.doc.data();
+         const id = a.payload.doc.id;
+         return {id, ...data};
+       });
+     })
+   );
+     
+   return this.users;
+ }
+
+/*
+ getRank()
+ {
+   // Pega os dados da colecao users
+   this.userColletion = this.afs.collection<User>("ranking");
+   this.users = this.userColletion.snapshotChanges().pipe(
+    map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return {id, ...data};
+      });
+    })
+    //return await userColletion.orderBy('media').limit(3).get();
+  //const firstThreeRes = await userColletion.orderBy('media').limit(3).get();
+ }*/
+
+  cadastra(user: User, id:string): Promise<DocumentReference>
+  {
+    // Definir a colecao
+    this.userColletion = this.afs.collection<User>("cursos/"+id+"/users");
+    console.log("cursos/"+id+"/users");
+    return this.userColletion.add(user);
+  }
+  
 }

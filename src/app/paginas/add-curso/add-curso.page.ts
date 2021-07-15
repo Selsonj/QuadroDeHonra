@@ -12,6 +12,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class AddCursoPage implements OnInit {
 
   curso: Curso = {
+    id: '',
     nome: ''
   };
 

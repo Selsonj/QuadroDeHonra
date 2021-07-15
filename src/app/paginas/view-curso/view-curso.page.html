@@ -7,9 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
-  
+<ion-content>  
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide class="slide">
       <ion-card color="secondary">
@@ -35,7 +33,6 @@
           <ion-label>
             <h2>{{cadeira.nome}}</h2>
           </ion-label>
-          <ion-button fill="outline" slot="end" [routerLink]="'/view-curso/'+curso.id">Ver</ion-button>
         </ion-item>
       </ion-list>
 
@@ -43,8 +40,35 @@
     
     <ion-slide class="slide">
       
-      <h1>Welcome</h1>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem tempora, deserunt ab, aliquid.
+      <ion-list>
+        <ion-list-header>
+          <ion-label>
+            Adicionar nota de um aluno
+          </ion-label>
+        </ion-list-header>
+
+        <ion-item >
+          <ion-label>Estudante</ion-label>
+          <ion-select interface="popover" >
+            <ion-select-option *ngFor="let user of (users | async)" value={{curso.id}}>{{user.nome}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      <ion-item *ngFor="let cadeira of (cadeiras | async)">
+        <ion-label>
+          <h2>{{cadeira.nome}}</h2>
+        </ion-label>
+        <ion-input type="text" placeholder="nota" ></ion-input>
+      </ion-item>
+
+      <ion-label><br>
+        <h2>Media: </h2>
+      </ion-label>
+  <br>
+  <ion-button slot="end" color="success" (click)="deleteCurso()">Media</ion-button>
+  <ion-button slot="end" color="primary" (click)="_openModal()">Add</ion-button>
+    </ion-list>
+
     </ion-slide>
   </ion-slides>
 </ion-content>

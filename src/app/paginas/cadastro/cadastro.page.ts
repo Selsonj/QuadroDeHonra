@@ -16,6 +16,8 @@ export class CadastroPage implements OnInit {
 
   private cursos: Observable<Curso[]>;
 
+   itemId: string;
+
   constructor(
     private authService: AuthService,
     private fbService: FirebaseService,
@@ -28,8 +30,10 @@ export class CadastroPage implements OnInit {
   }
 
   async cadastro(form): Promise<void> {
-      
-    this.authService.cadastroUser(form.value.email, form.value.password).then(
+    
+      console.log(this.itemId);
+    
+    this.authService.cadastroUser(form.value.nome, form.value.email, form.value.password, this.itemId).then(
       () => {
              this.router.navigateByUrl('user');
       },

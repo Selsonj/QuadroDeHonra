@@ -6,6 +6,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/componentes/modal/modal.component';
+import { User } from 'src/app/modal/User';
 
 @Component({
   selector: 'app-view-curso',
@@ -20,6 +21,7 @@ export class ViewCursoPage implements OnInit {
   };
 
   private cadeiras: Observable<Cadeira[]>;
+  private users: Observable<User[]>;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -32,9 +34,8 @@ export class ViewCursoPage implements OnInit {
     const id = this.activateRoute.snapshot.paramMap.get('id');
 
     this.cadeiras = this.fbService.getCadeiras(id);  
+    this.users = this.fbService.getUsers(id); 
   }
-
-  // Modal
 
   async _openModal()
   {
@@ -62,6 +63,12 @@ export class ViewCursoPage implements OnInit {
   }
 
   deleteCurso(){
+    this.fbService.deleteCurso(this.curso.id).then(() => {
+      this.router.navigateByUrl('admin');
+    })
+  }
+
+  Raking(){
     this.fbService.deleteCurso(this.curso.id).then(() => {
       this.router.navigateByUrl('admin');
     })
